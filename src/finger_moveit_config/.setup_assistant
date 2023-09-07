@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: finger_description
+    relative_path: urdf/finger.xacro
+    xacro_args: ""
+  SRDF:
+    relative_path: config/finger.srdf
+  CONFIG:
+    author_name: Ananth Rachakonda
+    author_email: ananth.rachakonda@research.iiit.ac.in
+    generated_timestamp: 1694016555

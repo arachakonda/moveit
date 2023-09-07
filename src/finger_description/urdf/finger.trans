@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+<robot name="finger" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+
+<transmission name="mcp_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="mcp">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="mcp_actr">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<transmission name="pip_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="pip">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="pip_actr">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<transmission name="dip_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="dip">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="dip_actr">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+</robot>

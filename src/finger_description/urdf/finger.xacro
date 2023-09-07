@@ -1,0 +1,112 @@
+<?xml version="1.0" ?>
+<robot name="finger" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find finger_description)/urdf/materials.xacro" />
+<xacro:include filename="$(find finger_description)/urdf/finger.trans" />
+<xacro:include filename="$(find finger_description)/urdf/finger.gazebo" />
+<link name="base_link">
+  <inertial>
+    <origin xyz="0.16887252148389836 0.04577342816138104 0.07823509357532026" rpy="0 0 0"/>
+    <mass value="0.18436764983478113"/>
+    <inertia ixx="4e-05" iyy="4.1e-05" izz="2e-05" ixy="-0.0" iyz="-1e-06" ixz="-1e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://finger_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://finger_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="lateral_1">
+  <inertial>
+    <origin xyz="-0.012881529511754003 0.03954619195738879 -0.015274493618100043" rpy="0 0 0"/>
+    <mass value="0.5774156891557832"/>
+    <inertia ixx="0.000409" iyy="0.000237" izz="0.00028" ixy="-8e-06" iyz="-2.3e-05" ixz="-4e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.1835 -0.04622 -0.087809" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://finger_description/meshes/lateral_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.1835 -0.04622 -0.087809" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://finger_description/meshes/lateral_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="middle_1">
+  <inertial>
+    <origin xyz="-0.01530422251663821 0.03663619236573172 -0.00011183550752595639" rpy="0 0 0"/>
+    <mass value="0.23665678569349335"/>
+    <inertia ixx="8.1e-05" iyy="3.3e-05" izz="8.9e-05" ixy="-5e-06" iyz="1e-06" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.1865 -0.102972 -0.092809" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://finger_description/meshes/middle_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.1865 -0.102972 -0.092809" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://finger_description/meshes/middle_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="distal_1">
+  <inertial>
+    <origin xyz="-0.016591342948051008 0.0249615131852991 -9.43911974680689e-05" rpy="0 0 0"/>
+    <mass value="0.11952821014405499"/>
+    <inertia ixx="2.8e-05" iyy="2.2e-05" izz="3.5e-05" ixy="-2e-06" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.1865 -0.154676 -0.092856" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://finger_description/meshes/distal_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.1865 -0.154676 -0.092856" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://finger_description/meshes/distal_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="mcp" type="continuous">
+  <origin xyz="0.1835 0.04622 0.087809" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="lateral_1"/>
+  <axis xyz="-1.0 0.0 -0.0"/>
+</joint>
+
+<joint name="pip" type="continuous">
+  <origin xyz="0.003 0.056752 0.005" rpy="0 0 0"/>
+  <parent link="lateral_1"/>
+  <child link="middle_1"/>
+  <axis xyz="1.0 0.0 0.0"/>
+</joint>
+
+<joint name="dip" type="continuous">
+  <origin xyz="0.0 0.051704 4.7e-05" rpy="0 0 0"/>
+  <parent link="middle_1"/>
+  <child link="distal_1"/>
+  <axis xyz="1.0 0.0 0.0"/>
+</joint>
+
+</robot>
