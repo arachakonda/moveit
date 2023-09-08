@@ -7,5 +7,6 @@
     "python.analysis.extraPaths": [
         "/home/ananth/projects/moveit_HWI/devel/lib/python3/dist-packages",
         "/opt/ros/noetic/lib/python3/dist-packages"
-    ]
+    ],
+    "C_Cpp.errorSquiggles": "disabled"
 }
