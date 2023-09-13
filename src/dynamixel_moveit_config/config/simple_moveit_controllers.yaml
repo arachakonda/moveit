@@ -1,2 +1,7 @@
 controller_list:
-  []
+  - name: position_trajectory_controller
+    action_ns: follow_joint_trajectory # the action namespace to use
+    type: FollowJointTrajectory # action type
+    default: True
+    joints:
+      - rev_1

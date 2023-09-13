@@ -4,6 +4,7 @@
 <xacro:include filename="$(find dynamixel_description)/urdf/materials.xacro" />
 <xacro:include filename="$(find dynamixel_description)/urdf/dynamixel.trans" />
 <xacro:include filename="$(find dynamixel_description)/urdf/dynamixel.gazebo" />
+
 <link name="base_link">
   <inertial>
     <origin xyz="-1.3696546658476628e-05 -0.011227940210464343 -0.007509758370360145" rpy="0 0 0"/>
@@ -46,11 +47,13 @@
   </collision>
 </link>
 
-<joint name="Revolute 1" type="continuous">
+<joint name="rev_1" type="continuous">
   <origin xyz="0.0 -0.0001 0.0" rpy="0 0 0"/>
   <parent link="base_link"/>
   <child link="shaft_1"/>
   <axis xyz="0.0 1.0 0.0"/>
 </joint>
+
+
 
 </robot>

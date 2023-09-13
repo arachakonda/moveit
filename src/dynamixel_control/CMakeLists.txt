@@ -60,6 +60,7 @@ find_package(catkin REQUIRED COMPONENTS
 #   Message2.msg
 # )
 add_message_files(
+  FILES
   dynamixelCmd.msg
   dynamixelTelemetry.msg
 )
@@ -121,7 +122,7 @@ catkin_package(
 #  LIBRARIES dynamixel_control
 #  CATKIN_DEPENDS cmake_modules control_msgs controller_manager hardware_interface message_generation ros_control_boilerplate roscpp rospy std_msgs urdf
 #  DEPENDS system_lib
-CATKIN DEPENDS message_runtime
+CATKIN_DEPENDS message_runtime
 )
 
 ###########

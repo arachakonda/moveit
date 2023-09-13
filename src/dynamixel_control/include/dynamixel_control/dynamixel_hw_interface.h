@@ -5,8 +5,8 @@
 #include <dynamixel_control/dynamixelCmd.h>
 #include <dynamixel_control/dynamixelTelemetry.h>
 
-#define DEG_TO_RAD (M_PI/180.0)
-#define RAD_TO_DEG (180.0/M_PI)
+#define PULSES_TO_RAD (M_PI/4096.0)
+#define RAD_TO_PULSES (4096.0/M_PI)
 
 namespace dynamixel_ns
 {

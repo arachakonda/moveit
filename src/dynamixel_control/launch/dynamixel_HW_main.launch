@@ -1,0 +1,51 @@
+<launch>
+    <!--RVIZ-->
+    <param name="robot_description" textfile="$(find dynamixel_description)/urdf/dynamixel.xacro"/>
+    <!-- Load the rviz settings -->
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find dynamixel_control)/default.rviz"/>
+
+    <!-- CORE -->
+
+    <!-- Load controller settings -->
+    <rosparam file="$(find dynamixel_control)/cfg/dynamixel_controllers.yaml" command="load"/>
+
+    <!-- load hardware interface -->
+    <node name="dynamixel_hw_main" pkg="dynamixel_control" type="dynamixel_hw_main" output="screen"/>
+
+    <!-- Load controller manager -->
+    <node name="ros_control_controller_manager" pkg="controller_manager" type="controller_manager" respawn="false" output="screen"
+    args="spawn joint_state_controller position_trajectory_controller"/>
+
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+        <rosparam param="source_list">[move_group/fake_controller_joint_states]</rosparam>
+    </node>
+
+
+    <!-- Convert joint states to /tf transforms -->
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+
+    <node pkg="tf2_ros" type="static_transform_publisher" name="virtual_joint_broadcaster_0" args="0 0 0 0 0 0 world base_link" />
+
+    <!-- MOVEIT -->
+    <!-- planning context does not specify the controller being used. only loads the URDF SRDF and other .yaml config files-->
+    <include file="$(find dynamixel_moveit_config)/launch/planning_context.launch">
+        <arg name="load_robot_description" value="true"/>
+    </include>
+
+    <!-- the following remap is needed to make the trajectory execution work with simple controller being chosen by the move_group launch file -->
+    <!-- note that the simple controller selected in the move_group launch file is the position_trajectory_controller of follow_joint_trajectory action server -->
+    <!-- The follow joint trajectory controller is from the moveit_simple_controller_manager plugin of the moveit plugins package. -->
+    <!-- we are refering to the follow_joint_trajectory controller in the position_trajectory_controller namespace -->
+    <remap from="/joint_trajectory_action" to="/position_trajectory_controller/follow_joint_trajectory"/>
+
+
+    <include file="$(find dynamixel_moveit_config)/launch/move_group.launch">
+        <arg name="allow_trajectory_execution" value="true"/>
+        <arg name="fake_execution_type" value="interpolate"/>
+        <arg name="info" value="true"/>
+    </include>
+
+    
+
+        
+</launch>

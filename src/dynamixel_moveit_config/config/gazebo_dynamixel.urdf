@@ -7,12 +7,12 @@
     <material name="silver">
         <color rgba="0.700 0.700 0.700 1.000" />
     </material>
-    <transmission name="Revolute 1_tran">
+    <transmission name="rev_1_tran">
         <type>transmission_interface/SimpleTransmission</type>
-        <joint name="Revolute 1">
+        <joint name="rev_1">
             <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
         </joint>
-        <actuator name="Revolute 1_actr">
+        <actuator name="rev_1_actr">
             <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
             <mechanicalReduction>1</mechanicalReduction>
         </actuator>
@@ -76,7 +76,7 @@
             </geometry>
         </collision>
     </link>
-    <joint name="Revolute 1" type="continuous">
+    <joint name="rev_1" type="continuous">
         <origin rpy="0 0 0" xyz="0.0 -0.0001 0.0" />
         <parent link="base_link" />
         <child link="shaft_1" />
