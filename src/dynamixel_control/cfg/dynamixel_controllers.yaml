@@ -1,6 +1,6 @@
 
 generic_hw_control_loop:
-  loop_hz: 10
+  loop_hz: 100
   cycle_time_error_threshold: .01
 
 hardware_interface:
@@ -17,10 +17,9 @@ position_trajectory_controller:
     - rev_1
   constraints:
     goal_time: 5.0
-    stopped_position_tolerance: 0.01 #Specifies how close the joint must be to its goal position to be considered successful.
-    joint1:
+    stopped_position_tolerance: 0.09 #Specifies how close the joint must be to its goal position to be considered successful.
+    rev_1:
         trajectory: 0.60 #allowed deviation during trajectory execution
         goal:       0.15 #allowed deviation from goal position
-    joint2:
-        trajectory: 0.60
-        goal:       0.15
+  gains:
+      rev_1: {p: 100.0,  i: 0.0, d: 0.01, i_clamp: 1}

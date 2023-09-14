@@ -6,19 +6,19 @@
 
     <!-- CORE -->
 
-    <!-- Load controller settings -->
+    <!-- Load controller settings from the configuration file of this package -->
     <rosparam file="$(find dynamixel_control)/cfg/dynamixel_controllers.yaml" command="load"/>
 
-    <!-- load hardware interface -->
+    <!-- run the hardware interface node residing in dynamixel_hw_main.cpp-->
     <node name="dynamixel_hw_main" pkg="dynamixel_control" type="dynamixel_hw_main" output="screen"/>
 
-    <!-- Load controller manager -->
+    <!-- spawn the controller manager with arguments from controller settings in dynamixel_controllers.yaml-->
     <node name="ros_control_controller_manager" pkg="controller_manager" type="controller_manager" respawn="false" output="screen"
     args="spawn joint_state_controller position_trajectory_controller"/>
 
-    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+    <!-- <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
         <rosparam param="source_list">[move_group/fake_controller_joint_states]</rosparam>
-    </node>
+    </node> -->
 
 
     <!-- Convert joint states to /tf transforms -->
