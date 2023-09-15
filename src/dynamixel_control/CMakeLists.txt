@@ -213,6 +213,8 @@ add_executable(dynamixel_hw_main
     src/dynamixel_hw_interface.cpp
 )
 
+
+
 add_dependencies(dynamixel_hw_main ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(dynamixel_hw_main ${catkin_LIBRARIES})
 #############
