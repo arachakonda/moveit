@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(finger_control)
+project(hand_control)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -117,7 +117,7 @@ generate_messages(DEPENDENCIES
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES finger_control
+#  LIBRARIES hand_control
  CATKIN_DEPENDS message_runtime
 #  DEPENDS system_lib
 )
@@ -135,7 +135,7 @@ ${catkin_INCLUDE_DIRS}
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/finger_control.cpp
+#   src/${PROJECT_NAME}/hand_control.cpp
 # )
 
 ## Add cmake target dependencies of the library
@@ -146,7 +146,7 @@ ${catkin_INCLUDE_DIRS}
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_node src/finger_control_node.cpp)
+# add_executable(${PROJECT_NAME}_node src/hand_control_node.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -207,21 +207,21 @@ ${catkin_INCLUDE_DIRS}
 
 
 
-add_executable(finger_hw_main 
-    include/finger_control/finger_hw_interface.h 
-    src/finger_hw_main.cpp
-    src/finger_hw_interface.cpp
+add_executable(hand_hw_main 
+    include/hand_control/hand_hw_interface.h 
+    src/hand_hw_main.cpp
+    src/hand_hw_interface.cpp
 )
 
-add_dependencies(finger_hw_main ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-target_link_libraries(finger_hw_main ${catkin_LIBRARIES})
+add_dependencies(hand_hw_main ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(hand_hw_main ${catkin_LIBRARIES})
 
 #############
 ## Testing ##
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_finger_control.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_hand_control.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()

@@ -1,22 +1,22 @@
 
-#include <finger_control/finger_hw_interface.h>
+#include <hand_control/hand_hw_interface.h>
 
 
-namespace finger_ns
+namespace hand_ns
 {
-fingerHWInterface::fingerHWInterface(ros::NodeHandle& nh, urdf::Model* urdf_model)
+handHWInterface::handHWInterface(ros::NodeHandle& nh, urdf::Model* urdf_model)
   : ros_control_boilerplate::GenericHWInterface(nh, urdf_model)
 {
     // Initialize ROS interfaces
-  telemetry_sub = nh.subscribe("/finger_ops/dynamixelTelemetry", 1, &fingerHWInterface::telemetryCallback, this);
+  telemetry_sub = nh.subscribe("/hand_ops/dynamixelTelemetry", 1, &handHWInterface::telemetryCallback, this);
 
-  cmd_pub=nh.advertise<finger_control::dynamixelCmd>("/finger_ops/dynamixelCmd", 1);
+  cmd_pub=nh.advertise<hand_control::dynamixelCmd>("/hand_ops/dynamixelCmd", 1);
 
-  ROS_INFO("fingerHWInterface Constructed.");
+  ROS_INFO("handHWInterface Constructed.");
 
 }
 
-void fingerHWInterface::telemetryCallback(const finger_control::dynamixelTelemetry::ConstPtr& msg){
+void handHWInterface::telemetryCallback(const hand_control::dynamixelTelemetry::ConstPtr& msg){
 
 //   float32 pulses
 // float32 velocity
@@ -39,21 +39,21 @@ void fingerHWInterface::telemetryCallback(const finger_control::dynamixelTelemet
 
 }
 
-void fingerHWInterface::init()
+void handHWInterface::init()
 {
   // Call parent class version of this function
   GenericHWInterface::init();
 
-  ROS_INFO("fingerHWInterface Ready.");
+  ROS_INFO("handHWInterface Ready.");
 }
 
-void fingerHWInterface::read(ros::Duration& elapsed_time)
+void handHWInterface::read(ros::Duration& elapsed_time)
 {
   // No need to read since our write() command populates our state for us
   // ros::spinOnce();
 }
 
-void fingerHWInterface::write(ros::Duration& elapsed_time)
+void handHWInterface::write(ros::Duration& elapsed_time)
 {
   // Safety
   //enforceLimits(elapsed_time);
@@ -64,8 +64,9 @@ void fingerHWInterface::write(ros::Duration& elapsed_time)
   // ros_control controllers take
   // care of PID loops for you. This P-controller is only intended to mimic the delay in real
   // hardware, somewhat like a simualator
-  static finger_control::dynamixelCmd dyn_cmd;
+  static hand_control::dynamixelCmd dyn_cmd;
   // these are nothing but the trajectories of position and velocity given by the controller
+  
   for(int i=0; i<num_joints_; i++){
     dyn_cmd.angle[i]=joint_position_command_[i];
     dyn_cmd.velocity[i]=joint_velocity_command_[i];
@@ -76,7 +77,7 @@ void fingerHWInterface::write(ros::Duration& elapsed_time)
 
 }
 
-void fingerHWInterface::enforceLimits(ros::Duration& period)
+void handHWInterface::enforceLimits(ros::Duration& period)
 {
   // Enforces position and velocity
   // pos_jnt_sat_interface_.enforceLimits(period);
@@ -84,4 +85,4 @@ void fingerHWInterface::enforceLimits(ros::Duration& period)
 
 
 
-}  // namespace finger_ns
+}  // namespace hand_ns

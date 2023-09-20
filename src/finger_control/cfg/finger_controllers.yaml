@@ -5,7 +5,9 @@ generic_hw_control_loop:
 
 hardware_interface:
   joints:
-    - rev_1
+    - mcp
+    - pip
+    - dip
 #for publishing all joint states in ROS
 joint_state_controller:
   type: joint_state_controller/JointStateController
@@ -14,12 +16,22 @@ joint_state_controller:
 position_trajectory_controller:
   type: position_controllers/JointTrajectoryController
   joints:
-    - rev_1
+    - mcp
+    - pip
+    - dip
   constraints:
     goal_time: 5.0
     stopped_position_tolerance: 0.09 #Specifies how close the joint must be to its goal position to be considered successful.
-    rev_1:
+    mcp:
         trajectory: 0.01 #allowed deviation during trajectory execution
         goal:       0.15 #allowed deviation from goal position
+    pip:
+        trajectory: 0.01
+        goal:       0.15
+    dip:
+        trajectory: 0.01
+        goal:       0.15
   gains:
-      rev_1: {p: 100.0,  i: 0.0, d: 0.01, i_clamp: 1}
+      mcp: {p: 100.0,  i: 0.0, d: 0.01, i_clamp: 1}
+      pip: {p: 100.0,  i: 0.0, d: 0.01, i_clamp: 1}
+      dip: {p: 100.0,  i: 0.0, d: 0.01, i_clamp: 1}

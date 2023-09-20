@@ -48,7 +48,7 @@ void dynamixelHWInterface::read(ros::Duration& elapsed_time)
 {
   // No need to read since our write() command populates our state for us
 
-  ros::spinOnce();
+  //ros::spinOnce();
 
 }
 
@@ -76,7 +76,7 @@ void dynamixelHWInterface::write(ros::Duration& elapsed_time)
 
   // sending command in degrees
   static dynamixel_control::dynamixelCmd dyn_cmd;
-
+  // these are nothing but the trajectories of position and velocity given by the controller
   for(int i=0; i<num_joints_; i++){
     dyn_cmd.angle[i]=joint_position_command_[i];
     dyn_cmd.velocity[i]=joint_velocity_command_[i];

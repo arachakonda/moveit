@@ -88,22 +88,25 @@
   </collision>
 </link>
 
-<joint name="mcp" type="continuous">
+<joint name="mcp" type="revolute">
   <origin xyz="0.1835 0.04622 0.087809" rpy="0 0 0"/>
+  <limit effort="30" velocity="2" lower="0" upper="1.4"/>
   <parent link="base_link"/>
   <child link="lateral_1"/>
-  <axis xyz="-1.0 0.0 -0.0"/>
+  <axis xyz="1.0 0.0 -0.0"/>
 </joint>
 
-<joint name="pip" type="continuous">
+<joint name="pip" type="revolute">
   <origin xyz="0.003 0.056752 0.005" rpy="0 0 0"/>
+  <limit effort="30" velocity="2" lower="0" upper="1.4"/>
   <parent link="lateral_1"/>
   <child link="middle_1"/>
   <axis xyz="1.0 0.0 0.0"/>
 </joint>
 
-<joint name="dip" type="continuous">
+<joint name="dip" type="revolute">
   <origin xyz="0.0 0.051704 4.7e-05" rpy="0 0 0"/>
+  <limit effort="30" velocity="2" lower="0" upper="1.4"/>
   <parent link="middle_1"/>
   <child link="distal_1"/>
   <axis xyz="1.0 0.0 0.0"/>

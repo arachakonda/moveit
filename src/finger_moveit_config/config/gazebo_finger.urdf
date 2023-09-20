@@ -152,7 +152,7 @@
         <origin rpy="0 0 0" xyz="0.1835 0.04622 0.087809" />
         <parent link="base_link" />
         <child link="lateral_1" />
-        <axis xyz="-1.0 0.0 -0.0" />
+        <axis xyz="1.0 0.0 -0.0" />
     </joint>
     <joint name="pip" type="continuous">
         <origin rpy="0 0 0" xyz="0.003 0.056752 0.005" />
@@ -167,4 +167,3 @@
         <axis xyz="1.0 0.0 0.0" />
     </joint>
 </robot>
-

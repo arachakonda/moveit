@@ -1,0 +1,87 @@
+
+generic_hw_control_loop:
+  loop_hz: 50
+  cycle_time_error_threshold: .01
+
+hardware_interface:
+  joints:
+    - i_mcp
+    - i_lateral
+    - i_pip
+    - i_dip
+    - m_mcp
+    - m_lateral
+    - m_pip
+    - m_dip
+    - t_mcp_f
+    - t_mcp_a
+    - t_pip
+#for publishing all joint states in ROS
+joint_state_controller:
+  type: joint_state_controller/JointStateController
+  publish_rate: 50
+#hardware control
+position_trajectory_controller:
+  type: position_controllers/JointTrajectoryController
+  joints:
+    - i_mcp
+    - i_lateral
+    - i_pip
+    - i_dip
+    - m_mcp
+    - m_lateral
+    - m_pip
+    - m_dip
+    - t_mcp_f
+    - t_mcp_a
+    - t_pip
+  constraints:
+    goal_time: 2.0
+    stopped_position_tolerance: 0.09 #Specifies how close the joint must be to its goal position to be considered successful.
+    i_mcp:
+        trajectory: 0.01 #allowed deviation during trajectory execution
+        goal:       0.15 #allowed deviation from goal position
+    i_lateral:
+        trajectory: 0.01
+        goal:       0.15
+    i_pip:
+        trajectory: 0.01
+        goal:       0.15
+    i_dip:
+        trajectory: 0.01
+        goal:       0.15
+    m_mcp:
+        trajectory: 0.01
+        goal:       0.15
+    m_lateral:
+        trajectory: 0.01
+        goal:       0.15
+    m_pip:
+        trajectory: 0.01
+        goal:       0.15
+    m_dip:
+        trajectory: 0.01
+        goal:       0.15
+    t_mcp_f:
+        trajectory: 0.01
+        goal:       0.15
+    t_mcp_a:
+        trajectory: 0.01
+        goal:       0.15
+    t_pip:
+        trajectory: 0.01
+        goal:       0.15
+    stop_trajectory_duration: 0.5 #Specifies how long it takes to stop the joint after the controller receives a stop command.
+    
+  gains:
+      i_mcp: {p: 1000.0,  i: 0.0, d: 0.01, i_clamp: 1}
+      i_lateral: {p: 1000.0,  i: 0.0, d: 0.01, i_clamp: 1}
+      i_pip: {p: 1000.0,  i: 0.0, d: 0.01, i_clamp: 1}
+      i_dip: {p: 1000.0,  i: 0.0, d: 0.01, i_clamp: 1}
+      m_mcp: {p: 1000.0,  i: 0.0, d: 0.01, i_clamp: 1}
+      m_lateral: {p: 1000.0,  i: 0.0, d: 0.01, i_clamp: 1}
+      m_pip: {p: 1000.0,  i: 0.0, d: 0.01, i_clamp: 1}
+      m_dip: {p: 1000.0,  i: 0.0, d: 0.01, i_clamp: 1}
+      t_mcp_f: {p: 1000.0,  i: 0.0, d: 0.01, i_clamp: 1}
+      t_mcp_a: {p: 1000.0,  i: 0.0, d: 0.01, i_clamp: 1}
+      t_pip: {p: 1000.0,  i: 0.0, d: 0.01, i_clamp: 1}

@@ -1,5 +1,5 @@
 controller_list:
-  - name: fake_finger_controller
+  - name: fake_middle_controller
     type: $(arg fake_execution_type)
     joints:
       - mcp
@@ -10,5 +10,5 @@ controller_list:
     joints:
       - dip
 initial:  # Define initial robot poses per group
-  - group: finger
+  - group: middle
     pose: home

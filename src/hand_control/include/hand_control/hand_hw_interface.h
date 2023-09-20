@@ -1,21 +1,21 @@
-#ifndef FINGER_HW_INTERFACE_H
-#define FINGER_HW_INTERFACE_H
+#ifndef HAND_HW_INTERFACE_H
+#define HAND_HW_INTERFACE_H
 
 #include <ros_control_boilerplate/generic_hw_interface.h>
-#include <finger_control/dynamixelCmd.h>
-#include <finger_control/dynamixelTelemetry.h>
+#include <hand_control/dynamixelCmd.h>
+#include <hand_control/dynamixelTelemetry.h>
 
-namespace finger_ns
+namespace hand_ns
 {
 /** \brief Hardware interface for a robot */
-class fingerHWInterface : public ros_control_boilerplate::GenericHWInterface
+class handHWInterface : public ros_control_boilerplate::GenericHWInterface
 {
 public:
   /**
    * \brief Constructor
    * \param nh - Node handle for topics.
    */
-  fingerHWInterface(ros::NodeHandle& nh, urdf::Model* urdf_model = NULL);
+  handHWInterface(ros::NodeHandle& nh, urdf::Model* urdf_model = NULL);
 
   /** \brief Initialize the robot hardware interface */
   virtual void init();
@@ -32,7 +32,9 @@ public:
 protected:
     //define the subscriber and publisher
   ros::Subscriber telemetry_sub;
-  void telemetryCallback(const finger_control::dynamixelTelemetry::ConstPtr& msg);
+  void telemetryCallback(const hand_control::dynamixelTelemetry::ConstPtr& msg);
+  std::vector<double> joint_position_prev_;
+
 
   ros::Publisher cmd_pub;
 
