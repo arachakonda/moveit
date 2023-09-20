@@ -42,7 +42,9 @@ void handHWInterface::telemetryCallback(const hand_control::dynamixelTelemetry::
 void handHWInterface::init()
 {
   // Call parent class version of this function
-  GenericHWInterface::init();
+  ros_control_boilerplate::GenericHWInterface::init();
+
+  joint_position_prev_.resize(joint_position_.size());
 
   ROS_INFO("handHWInterface Ready.");
 }
@@ -66,13 +68,28 @@ void handHWInterface::write(ros::Duration& elapsed_time)
   // hardware, somewhat like a simualator
   static hand_control::dynamixelCmd dyn_cmd;
   // these are nothing but the trajectories of position and velocity given by the controller
-  
+  bool change = false;
+
+  //position change check - only works for trajectory tracking without force control
   for(int i=0; i<num_joints_; i++){
-    dyn_cmd.angle[i]=joint_position_command_[i];
-    dyn_cmd.velocity[i]=joint_velocity_command_[i];
-    // dyn_cmd.current[i]=joint_effort_command_[i];
+    if(joint_position_command_[i]!=joint_position_prev_[i]){
+      change=true;
+      break;
+    }
   }
-  cmd_pub.publish(dyn_cmd);
+
+  //publish if change detected
+  if(change){
+    for(int i=0; i<num_joints_; i++){
+      dyn_cmd.angle[i]=joint_position_command_[i];
+      dyn_cmd.velocity[i]=joint_velocity_command_[i];
+      // dyn_cmd.current[i]=joint_effort_command_[i];
+      joint_position_prev_[i]=joint_position_command_[i];
+    }
+    cmd_pub.publish(dyn_cmd);
+    change = false;
+  }
+
 
 
 }
